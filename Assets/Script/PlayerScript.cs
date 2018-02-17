@@ -42,11 +42,12 @@ public class PlayerScript : MonoBehaviour {
 		isOnFloor = Physics2D.Linecast(transform.position, floorVerificator.position, 1 << LayerMask.NameToLayer("Floor"));
 
 		// Jump
-		if (Input.GetButtonDown ("Jump") && isOnFloor) {
+		if (Input.GetAxisRaw("Vertical") > 0.1 && isOnFloor) {
 			rb.velocity = new Vector2 (0.0f, impulse);
 		}
 
 		animator.SetFloat ("pHorizontal", Mathf.Abs(moveX));
 		animator.SetBool ("onFloor", isOnFloor);
+		animator.SetBool ("pFire", Input.GetButton ("Jump"));
 	}
 }
